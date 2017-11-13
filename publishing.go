@@ -40,13 +40,13 @@ func (p *Publishing) listUnpublishNotificationsSince(id int64) ([]*Notification,
 
 // EventUnmarshaler unmarshals event.
 type EventUnmarshaler interface {
-	UnmarshalEvent([]byte) (interface{}, error)
+	UnmarshalEvent(name string, version int, data []byte) (interface{}, error)
 }
 
 func toNotifications(events []*StoredEvent, unmarshaler EventUnmarshaler) ([]*Notification, error) {
 	notifications := make([]*Notification, len(events))
 	for i, e := range events {
-		event, err := unmarshaler.UnmarshalEvent(e.Body)
+		event, err := unmarshaler.UnmarshalEvent(e.Name, e.Version, e.Body)
 		if err != nil {
 			return nil, err
 		}
