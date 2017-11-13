@@ -26,7 +26,7 @@ func (p *Publishing) PublishNotifications() error {
 			return err
 		}
 	}
-	return p.TrackerStore.TrackMostRecentNotification(tracker, notifications)
+	return p.TrackerStore.TrackMostRecentPublishedNotification(tracker, notifications)
 }
 
 func (p *Publishing) listUnpublishNotificationsSince(id int64) ([]*Notification, error) {

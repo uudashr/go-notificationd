@@ -11,7 +11,7 @@ import (
 // TrackerStore stores the notification tracker.
 type TrackerStore interface {
 	TrackerOf(name string) (*Tracker, error)
-	TrackMostRecentNotification(*Tracker, []*Notification) error
+	TrackMostRecentPublishedNotification(*Tracker, []*Notification) error
 }
 
 // Tracker is the notification tracker.
