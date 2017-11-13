@@ -10,6 +10,7 @@ type Notification struct {
 	ID          int64
 	Name        string
 	Event       interface{}
+	Version     int
 	OccuredTime time.Time
 }
 

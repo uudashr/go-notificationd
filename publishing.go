@@ -55,6 +55,7 @@ func toNotifications(events []*StoredEvent, unmarshaler EventUnmarshaler) ([]*No
 			ID:          e.ID,
 			Name:        e.Name,
 			Event:       event,
+			Version:     e.Version,
 			OccuredTime: e.OccuredTime,
 		}
 	}
