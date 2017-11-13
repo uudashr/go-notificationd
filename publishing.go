@@ -43,6 +43,14 @@ type EventUnmarshaler interface {
 	UnmarshalEvent(name string, version int, data []byte) (interface{}, error)
 }
 
+// EventUnmarshalerFunc is the function adapter of EventUnmarshaler.
+type EventUnmarshalerFunc func(name string, version int, data []byte) (interface{}, error)
+
+// UnmarshalEvent invoke u(name, version, data).
+func (u EventUnmarshalerFunc) UnmarshalEvent(name string, version int, data []byte) (interface{}, error) {
+	return u(name, version, data)
+}
+
 func toNotifications(events []*StoredEvent, unmarshaler EventUnmarshaler) ([]*Notification, error) {
 	notifications := make([]*Notification, len(events))
 	for i, e := range events {
