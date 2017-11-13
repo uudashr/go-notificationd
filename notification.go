@@ -56,6 +56,7 @@ func ReadNotification(data []byte) (*NotificationReader, error) {
 		id:          v.ID,
 		name:        v.Name,
 		eventData:   v.Event,
+		version:     v.Version,
 		occuredTime: occuredTime,
 	}, nil
 }
