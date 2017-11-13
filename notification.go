@@ -27,16 +27,11 @@ func (n Notification) MarshalJSON() ([]byte, error) {
 		return nil, err
 	}
 
-	version := 1
-	if v, ok := n.Event.(Versioned); ok {
-		version = v.Version()
-	}
-
 	return json.Marshal(jsonizeNotification{
 		ID:          n.ID,
 		Name:        n.Name,
 		Event:       event,
-		Version:     version,
+		Version:     EventVersion(event),
 		OccuredTime: n.OccuredTime.Format(time.RFC3339Nano),
 	})
 }
@@ -102,4 +97,13 @@ type jsonizeNotification struct {
 	Event       json.RawMessage `json:"event"`
 	Version     int             `json:"version"`
 	OccuredTime string          `json:"occuredTime"`
+}
+
+// EventVersion of the event. Default to 1.
+func EventVersion(event interface{}) int {
+	if v, ok := event.(Versioned); ok {
+		return v.Version()
+	}
+
+	return 1
 }
