@@ -9,7 +9,7 @@ import (
 // EventStore stores the event.
 type EventStore interface {
 	Append(eventd.Event) (*StoredEvent, error)
-	StoredEventSince(int64) ([]*StoredEvent, error)
+	StoredEventsSince(int64) ([]*StoredEvent, error)
 }
 
 // StoredEvent is the stored event.

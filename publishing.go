@@ -30,7 +30,7 @@ func (p *Publishing) PublishNotifications() error {
 }
 
 func (p *Publishing) listUnpublishNotificationsSince(id int64) ([]*Notification, error) {
-	events, err := p.EventStore.StoredEventSince(id)
+	events, err := p.EventStore.StoredEventsSince(id)
 	if err != nil {
 		return nil, err
 	}
